@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.org.jetbrains.koltinx.kover)
 }
 
 android {
@@ -93,4 +94,48 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+}
+
+koverReport {
+    filters {
+        excludes {
+            packages(
+                "dagger.hilt.internal.aggregatedroot.codegen.*",
+                "hilt_aggregated_deps.*",
+                "com.dev.rawgapps.*.di.*",
+                "com.dev.rawgapps.*.Hilt_*",
+                "com.dev.rawgapps.*.*_Factory*",
+                "com.dev.rawgapps.*.*_HiltModules*",
+                "com.dev.rawgapps.*.*Module_*",
+                "com.dev.rawgapps.*.*MembersInjector*",
+                "com.dev.rawgapps.*.*_Impl*",
+                "com.dev.rawgapps.ComposableSingletons*",
+                "com.dev.rawgapps.BuildConfig*",
+                "com.dev.rawgapps.*.Fake*",
+                "com.dev.rawgapps.app.ComposableSingletons*"
+            )
+
+        }
+
+    }
+    defaults{
+        // configure XML report
+        xml{
+            //  generate an XML report when running the `check` task
+            onCheck = false
+            // XML report file
+            setReportFile(layout.buildDirectory.file("my-project-report/result.xml"))
+        }
+
+        html{
+            // custom header in HTML reports, project path by default
+            title = "Rawg Apps report title"
+
+            //  generate a HTML report when running the `check` task
+            onCheck = false
+
+            // directory for HTML report
+            setReportDir(layout.buildDirectory.dir("my-project-report/html-result"))
+        }
+    }
 }
