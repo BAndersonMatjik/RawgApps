@@ -179,9 +179,12 @@ data class PlatformX(
     @SerialName("released_at")
     val releasedAt: String?,
     @SerialName("requirements_en")
-    val requirementsEn: RequirementsEn?,
+    val requirementsEn: Requirements?,
     @SerialName("requirements_ru")
-    val requirementsRu: RequirementsRu?
+    val requirementsRu: Requirements?,
+    @SerialName("requirements")
+    val requirements: Requirements?
+
 )
 
 @Serializable
@@ -256,22 +259,6 @@ data class PlatformXX(
     val yearEnd: Int?,
     @SerialName("year_start")
     val yearStart: Int?
-)
-
-@Serializable
-data class RequirementsEn(
-    @SerialName("minimum")
-    val minimum: String?,
-    @SerialName("recommended")
-    val recommended: String?
-)
-
-@Serializable
-data class RequirementsRu(
-    @SerialName("minimum")
-    val minimum: String?,
-    @SerialName("recommended")
-    val recommended: String?
 )
 
 @Serializable
