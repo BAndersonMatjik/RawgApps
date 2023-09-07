@@ -10,7 +10,6 @@ activity-compose = "1.7.0"
 compose-bom = "2023.03.00"
 timber="5.0.1"
 dagger-hilt="2.47"
-moshi="1.9.3"
 room="2.5.2"
 
 [libraries]
@@ -31,8 +30,6 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 timber = { group = 'com.jakewharton.timber:timber', name ="timber", version.ref = "timber"}
 dagger-hilt = {group = 'com.google.dagger:hilt-android', name = "dagger-hilt",version.ref= "dagger-hilt"}
 dagger-hilt-compiler = {group = 'com.google.dagger:hilt-compiler', name = "dagger-hilt-compiler",version.ref= "dagger-hilt"}
-moshi = {group = 'com.squareup.moshi:moshi-kotlin', name = "moshi", version.ref="moshi"}
-moshi-codegen = {group = 'com.squareup.moshi:moshi-codegen', name = "moshi-codegen", version.ref="moshi"}
 room-ktx = {group = 'androidx.room:room-ktx', name = "room-ktx", version.ref="room"}
 room-compiler = {group = 'androidx.room:room-compiler', name = "room-compiler", version.ref="room"}
 
