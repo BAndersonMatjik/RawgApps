@@ -70,6 +70,11 @@ dependencies {
     kapt(libs.room.compiler)
 
 
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.serialization.json)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
