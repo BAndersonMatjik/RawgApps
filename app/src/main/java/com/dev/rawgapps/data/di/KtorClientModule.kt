@@ -24,7 +24,7 @@ import javax.inject.Singleton
 object KtorClientModule {
     @Provides
     @Singleton
-    private fun provideKtorClient():HttpClient{
+    fun provideKtorClient():HttpClient{
         return HttpClient {
             install(JsonFeature){
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
