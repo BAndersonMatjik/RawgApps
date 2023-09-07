@@ -15,8 +15,12 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.observer.ResponseObserver
 import io.ktor.client.request.header
+import io.ktor.client.request.host
+import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.URLProtocol
+import io.ktor.http.append
 import timber.log.Timber
 import javax.inject.Singleton
 
@@ -52,7 +56,10 @@ object KtorClientModule {
 
             install(DefaultRequest){
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
-                header("token",ApiRoutes.API_KEY)
+                //set base url
+                host = ApiRoutes.BASE_URL
+                url.protocol = URLProtocol.HTTPS
+                url.parameters.append("key","${ApiRoutes.API_KEY}")
             }
         }
     }
