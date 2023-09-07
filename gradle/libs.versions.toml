@@ -13,6 +13,7 @@ dagger-hilt="2.47"
 room="2.5.2"
 ktor="1.5.0"
 kotlin-serialization="1.0.1"
+coil ="2.4.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -38,6 +39,8 @@ ktor-client-android = {group = 'io.ktor', name = "ktor-client-android", version.
 ktor-client-serialization ={group = 'io.ktor', name = "ktor-client-serialization", version.ref="ktor"}
 ktor-client-logging={group = 'io.ktor', name = "ktor-client-logging-jvm", version.ref="ktor"}
 serialization-json={group = 'org.jetbrains.kotlinx' ,name="kotlinx-serialization-json", version.ref= "kotlin-serialization"}
+coil={group = 'io.coil-kt' ,name="coil-compose", version.ref= "coil"}
+
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
