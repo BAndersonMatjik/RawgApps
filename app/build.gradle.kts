@@ -65,8 +65,9 @@ dependencies {
     implementation(libs.timber)
 
 
+
     implementation(libs.room.ktx)
-//    kapt(libs.room.compiler)
+    kapt(libs.room.compiler)
 
 
     testImplementation(libs.junit)
