@@ -37,7 +37,7 @@ room-compiler = {group = 'androidx.room', name = "room-compiler", version.ref="r
 ktor-client-android = {group = 'io.ktor', name = "ktor-client-android", version.ref="ktor"}
 ktor-client-serialization ={group = 'io.ktor', name = "ktor-client-serialization", version.ref="ktor"}
 ktor-client-logging={group = 'io.ktor', name = "ktor-client-logging-jvm", version.ref="ktor"}
-serialization-json={group = 'org.jetbrains.kotlinx' ,name="kotlinx-serialization-json", version-ref= "kotlin-serialization"}
+serialization-json={group = 'org.jetbrains.kotlinx' ,name="kotlinx-serialization-json", version.ref= "kotlin-serialization"}
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
