@@ -14,6 +14,7 @@ room="2.5.2"
 ktor="1.5.0"
 kotlin-serialization="1.0.1"
 coil ="2.4.0"
+navigation-compose="2.7.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -40,7 +41,7 @@ ktor-client-serialization ={group = 'io.ktor', name = "ktor-client-serialization
 ktor-client-logging={group = 'io.ktor', name = "ktor-client-logging-jvm", version.ref="ktor"}
 serialization-json={group = 'org.jetbrains.kotlinx' ,name="kotlinx-serialization-json", version.ref= "kotlin-serialization"}
 coil={group = 'io.coil-kt' ,name="coil-compose", version.ref= "coil"}
-
+navigation-compose={group = 'androidx.navigation' ,name="navigation-compose", version.ref= "navigation-compose"}
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
