@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.org.jetbrains.kotlin.serialization)
+    alias(libs.plugins.com.google.dagger.hilt.android) apply false
 }
 
 android {
@@ -64,7 +65,8 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.timber)
 
-
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
