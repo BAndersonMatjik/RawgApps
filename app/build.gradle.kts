@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -62,6 +63,9 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.timber)
 
+
+    implementation(libs.room.ktx)
+//    kapt(libs.room.compiler)
 
 
     testImplementation(libs.junit)
