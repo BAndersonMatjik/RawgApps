@@ -5,5 +5,5 @@ import android.content.pm.ApplicationInfo
 
 
 fun Context.isApplicationDebuggable():Boolean{
-    return this.applicationInfo.flags == ApplicationInfo.FLAG_DEBUGGABLE
+    return (this.applicationInfo.flags.and(ApplicationInfo.FLAG_DEBUGGABLE))!=0
 }
