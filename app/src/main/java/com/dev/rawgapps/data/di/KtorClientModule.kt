@@ -1,6 +1,7 @@
 package com.dev.rawgapps.data.di
 
 import android.util.Log
+import com.dev.rawgapps.data.remote.ApiRoutes
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,6 +52,7 @@ object KtorClientModule {
 
             install(DefaultRequest){
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
+                header("token",ApiRoutes.API_KEY)
             }
         }
     }
