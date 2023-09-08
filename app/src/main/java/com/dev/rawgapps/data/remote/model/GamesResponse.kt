@@ -179,12 +179,11 @@ data class PlatformX(
     @SerialName("released_at")
     val releasedAt: String?,
     @SerialName("requirements_en")
-    val requirementsEn: Requirements?,
+    val requirementsEn: Requirements?=null,
     @SerialName("requirements_ru")
-    val requirementsRu: Requirements?,
+    val requirementsRu: Requirements?=null,
     @SerialName("requirements")
-    val requirements: Requirements?
-
+    val requirements: Requirements? =null
 )
 
 @Serializable
