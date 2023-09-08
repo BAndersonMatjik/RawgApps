@@ -30,10 +30,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dev.rawgapps.feature.game.GameScreen
+import com.dev.rawgapps.common.CustomFontFamily
 import com.dev.rawgapps.ui.theme.RawgAppsTheme
 
 @Composable
@@ -66,7 +67,7 @@ fun SearchTextField(
                     Icon(imageVector = Icons.Filled.Search, contentDescription = "icon search")
                     Spacer(modifier = Modifier.width(width = 8.dp))
                     if (text.isEmpty()&&!isFocus){
-                        Text(text= hint)
+                        Text(text= hint, fontFamily = CustomFontFamily.InterFontFamily, fontWeight = FontWeight.Normal)
                     }else{
                         it()
                     }
@@ -80,6 +81,6 @@ fun SearchTextField(
 @Composable
 fun SearchTextFieldPreview() {
     RawgAppsTheme {
-        SearchTextField()
+        SearchTextField(hint = "Search games")
     }
 }
