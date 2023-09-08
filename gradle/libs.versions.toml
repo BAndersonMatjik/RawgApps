@@ -48,7 +48,7 @@ navigation-compose={group = 'androidx.navigation' ,name="navigation-compose", ve
 paging-runtime={group = 'androidx.paging' ,name="paging-runtime", version.ref= "paging-source"}
 paging-compose={group = 'androidx.paging' ,name="paging-compose", version.ref= "paging-source"}
 navigation-hilt={group = 'androidx.hilt' ,name="hilt-navigation-compose", version.ref= "hilt-navigation"}
-
+ktor-client-mock={group = 'io.ktor' ,name="ktor-client-mock", version.ref= "ktor"}
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
