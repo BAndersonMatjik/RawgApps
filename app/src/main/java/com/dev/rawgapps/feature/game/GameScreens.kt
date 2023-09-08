@@ -1,24 +1,14 @@
 package com.dev.rawgapps.feature.game
 
-import android.content.ClipData.Item
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,9 +23,29 @@ import com.dev.rawgapps.ui.GameCard
 import com.dev.rawgapps.ui.SearchTextField
 import com.dev.rawgapps.ui.theme.RawgAppsTheme
 
+
 @Composable
-fun GameScreen(viewModel: GameViewModel = hiltViewModel(), navigateToFavorite: () -> Unit = {}) {
+internal fun GameRoute(
+    viewModel: GameViewModel = hiltViewModel(),
+    navigateToFavorite: () -> Unit = {},
+    navigateToDetailGame: (Game) -> Unit = {}
+) {
     val gamePagingItems: LazyPagingItems<Game> = viewModel.gamesState.collectAsLazyPagingItems()
+    GameScreen(
+        gamePagingItems = gamePagingItems,
+        navigateToFavorite = navigateToFavorite,
+        navigateToDetailGame = navigateToDetailGame
+    )
+}
+
+
+@Composable
+fun GameScreen(
+    gamePagingItems: LazyPagingItems<Game>,
+    navigateToFavorite: () -> Unit = {},
+    navigateToDetailGame: (Game) -> Unit = {}
+) {
+
     Column(modifier = Modifier.fillMaxSize()) {
         DefaultToolbar(title = "Rawg Game", onFavoriteClick = navigateToFavorite)
         SearchTextField(
@@ -85,7 +95,7 @@ fun GameScreen(viewModel: GameViewModel = hiltViewModel(), navigateToFavorite: (
 @Composable
 fun GameScreenPreview() {
     RawgAppsTheme {
-        GameScreen(navigateToFavorite = {})
+        GameScreen(gamePagingItems =, navigateToFavorite = {}, navigateToDetailGame = {})
     }
 }
 

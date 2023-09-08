@@ -31,13 +31,14 @@ import com.dev.rawgapps.common.CustomColor
 import com.dev.rawgapps.common.CustomFontFamily
 import com.dev.rawgapps.feature.favoritegame.FavoriteGameScreen
 import com.dev.rawgapps.feature.game.DetailGameScreen
+import com.dev.rawgapps.feature.game.GameRoute
 import com.dev.rawgapps.feature.game.GameScreen
 
 @Composable
 fun MainScreen(navController: NavHostController) {
     NavHost(navController = navController, startDestination = DestinationRoute.GameScreen.route, builder = {
         composable(DestinationRoute.GameScreen.route){
-            GameScreen(navigateToFavorite = {
+            GameRoute(navigateToFavorite = {
                 navController.navigate(DestinationRoute.FavoriteGameScreen.route)
             })
         }
