@@ -165,5 +165,5 @@ data class Requirements(
     @SerialName("minimum")
     val minimum: String?,
     @SerialName("recommended")
-    val recommended: String?
+    val recommended: String?=null
 )
