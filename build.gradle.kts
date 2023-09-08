@@ -7,5 +7,6 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.serialization) apply false
     alias(libs.plugins.com.google.dagger.hilt.android) apply false
     alias(libs.plugins.org.jetbrains.koltinx.kover) apply false
+    alias(libs.plugins.kotlinx.parcelize)apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block
