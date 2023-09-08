@@ -24,7 +24,7 @@ fun GameScreen(navigateToFavorite:()->Unit){
 
     Column(modifier = Modifier.fillMaxSize()) {
         DefaultToolbar(title = "Rawg Game", onFavoriteClick = navigateToFavorite)
-        SearchTextField(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp))
+        SearchTextField(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp), hint = "Search Game")
     }
 }
 
