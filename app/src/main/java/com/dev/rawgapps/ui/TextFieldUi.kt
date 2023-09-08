@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,10 +39,18 @@ import com.dev.rawgapps.ui.theme.RawgAppsTheme
 @Composable
 fun SearchTextField(
     modifier: Modifier = Modifier,
-    cardColors: CardColors = CardDefaults.cardColors(containerColor = Color.White)
+    cardColors: CardColors = CardDefaults.cardColors(containerColor = Color.White),
+    hint:String = "Hint"
 ) {
     var text by rememberSaveable { mutableStateOf("") }
-    Card(modifier = modifier.shadow(ambientColor = Color.Gray.copy(alpha = 0.8F), elevation = 10.dp), shape = CardDefaults.elevatedShape, colors = cardColors) {
+    var isFocus by rememberSaveable {
+        mutableStateOf(false)
+    }
+    Card(modifier = modifier
+        .shadow(ambientColor = Color.Gray.copy(alpha = 0.8F), elevation = 10.dp)
+        .onFocusChanged {
+            isFocus = it.isFocused
+        }, shape = CardDefaults.elevatedShape, colors = cardColors) {
         BasicTextField(
             modifier = Modifier.fillMaxWidth(),
             value = text,
@@ -56,7 +65,11 @@ fun SearchTextField(
                 ) {
                     Icon(imageVector = Icons.Filled.Search, contentDescription = "icon search")
                     Spacer(modifier = Modifier.width(width = 8.dp))
-                    it()
+                    if (text.isEmpty()&&!isFocus){
+                        Text(text= hint)
+                    }else{
+                        it()
+                    }
                 }
             }
         )
