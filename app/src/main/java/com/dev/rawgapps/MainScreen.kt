@@ -37,7 +37,9 @@ import com.dev.rawgapps.feature.game.GameScreen
 fun MainScreen(navController: NavHostController) {
     NavHost(navController = navController, startDestination = DestinationRoute.GameScreen.route, builder = {
         composable(DestinationRoute.GameScreen.route){
-            GameScreen()
+            GameScreen(navigateToFavorite = {
+                navController.navigate(DestinationRoute.FavoriteGameScreen.route)
+            })
         }
         composable(DestinationRoute.FavoriteGameScreen.route){
             DetailGameScreen()
@@ -47,5 +49,15 @@ fun MainScreen(navController: NavHostController) {
         }
     })
 }
+
+@Composable
+@Preview(showBackground = true, device = Devices.NEXUS_5)
+fun MainScreenPreview(){
+    val navController = rememberNavController()
+    MainScreen(navController = navController)
+}
+
+
+
 
 
