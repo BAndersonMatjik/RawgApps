@@ -10,14 +10,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.dev.rawgapps.common.DevicePreviews
+import com.dev.rawgapps.common.ui.GameScreenPreviewParameterProvider
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.ui.DefaultToolbar
 import com.dev.rawgapps.ui.GameCard
@@ -92,33 +93,12 @@ fun GameScreen(
 }
 
 
-@Preview(showBackground = true, device = Devices.NEXUS_5)
+@DevicePreviews()
 @Composable
-fun GameScreenPreview() {
-    val fakeListGame: MutableStateFlow<PagingData<Game>> = MutableStateFlow(
-        value = PagingData.from(
-            listOf(
-                Game(
-                    slug = "class",
-                    name = "Rita Freeman",
-                    genre = listOf("RPG", "ACTION"),
-                    released = "vis",
-                    backgroundImage = "tractatos",
-                    description = "lacus"
-                ), Game(
-                    slug = "class",
-                    name = "Rita Freeman",
-                    genre = listOf("RPG", "ACTION"),
-                    released = "vis",
-                    backgroundImage = "tractatos",
-                    description = "lacus"
-                )
-            )
-        )
-    )
+fun GameScreenPreview(@PreviewParameter(GameScreenPreviewParameterProvider::class) gamePagingItems:MutableStateFlow<PagingData<Game>>) {
     RawgAppsTheme {
         GameScreen(
-            gamePagingItems = fakeListGame.collectAsLazyPagingItems(),
+            gamePagingItems = gamePagingItems.collectAsLazyPagingItems(),
             navigateToFavorite = {},
             navigateToDetailGame = {})
     }
