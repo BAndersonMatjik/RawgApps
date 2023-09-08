@@ -58,6 +58,6 @@ org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.re
 com-google-dagger-hilt-android = {id='com.google.dagger.hilt.android', version.ref  = "dagger-hilt"}
 org-jetbrains-kotlin-serialization = {id='org.jetbrains.kotlin.plugin.serialization', version.ref  = "org-jetbrains-kotlin-android"}
 org-jetbrains-koltinx-kover = {id='org.jetbrains.kotlinx.kover', version.ref  = "kover"}
-
+kotlinx-parcelize = {id='kotlin-parcelize',version.ref = "org-jetbrains-kotlin-android"}
 [bundles]
 
