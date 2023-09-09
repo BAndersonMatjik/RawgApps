@@ -38,9 +38,7 @@ class MainActivityTest {
 
     @Test
     fun when_I_test_then_it_works2() {
-
         composeTestRule.onRoot().printToLog("TAG")
-
         composeTestRule.onNodeWithText("Rawg games".uppercase(), useUnmergedTree = true)
             .assertIsDisplayed()
         composeTestRule.onNodeWithText("Search Games", useUnmergedTree = true)
@@ -57,13 +55,7 @@ class MainActivityTest {
             }
         }
 
-        //When user request to see list of games
-        composeTestRule.onNodeWithText("Loading - LOADING").assertIsDisplayed()
-
-        //Then the user can view list with game titles, images, and other brief information.
-//        composeTestRule.waitUntil{
-//            composeTestRule.onAllNodesWithText("Grand Theft Auto V").fetchSemanticsNodes().size ==1
-//        }
+        composeTestRule.onNodeWithText("Grand Theft Auto V").assertIsDisplayed()
 
     }
 
