@@ -1,5 +1,9 @@
 [versions]
 agp = "8.1.0"
+hilt-android-testing = "2.47"
+mockk = "1.37.1"
+mockk-agent = "1.13.7"
+mockk-android = "1.13.7"
 org-jetbrains-kotlin-android = "1.8.10"
 core-ktx = "1.9.0"
 junit = "4.13.2"
@@ -19,15 +23,20 @@ paging-source="3.2.1"
 hilt-navigation="1.0.0"
 kover="0.7.3"
 kotlinx-coroutine-test="1.7.1"
+roboelectric = "4.10.3"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-testing" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android-testing" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk-agent" }
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk-android" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -51,6 +60,8 @@ paging-compose={group = 'androidx.paging' ,name="paging-compose", version.ref= "
 navigation-hilt={group = 'androidx.hilt' ,name="hilt-navigation-compose", version.ref= "hilt-navigation"}
 ktor-client-mock={group = 'io.ktor' ,name="ktor-client-mock", version.ref= "ktor"}
 kotlinx-coroutines-test={group = 'org.jetbrains.kotlinx' ,name="kotlinx-coroutines-test", version.ref= "kotlinx-coroutine-test"}
+roboelectric={group='org.robolectric',name="robolectric",version.ref = "roboelectric"}
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-kapt = {id = "org.jetbrains.kotlin.kapt",version.ref = "org-jetbrains-kotlin-android"}
