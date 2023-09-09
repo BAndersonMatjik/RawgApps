@@ -5,5 +5,5 @@ import com.dev.rawgapps.domain.Game
 import kotlinx.coroutines.flow.Flow
 
 interface RawgRepository {
-    suspend fun getGames(): Flow<PagingData<Game>>
+    suspend fun getGames(keyword:String): Flow<PagingData<Game>>
 }
