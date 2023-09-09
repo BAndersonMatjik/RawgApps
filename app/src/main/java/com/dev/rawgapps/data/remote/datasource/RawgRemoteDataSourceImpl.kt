@@ -26,7 +26,7 @@ class RawgRemoteDataSourceImpl @Inject constructor(private val httpClient: HttpC
         val result = kotlin.runCatching {
             httpClient.get<GamesResponse>(url).let {gamesResponse->
                 gamesResponse.results?.map {
-                    Game(it.slug?:"",it.name?:"", genre = it.genres?.map { it.name?:"" }?: listOf(), released = it.released?:"", backgroundImage = it.backgroundImage?:"", description = "")
+                    Game(it.slug?:"",it.name?:"", genre = it.genres?.map { it.name?:"" }?: listOf(), released = it.released?:"", backgroundImage = it.backgroundImage?:"", description = "", developer = "")
                 }?: listOf()
             }
         }
