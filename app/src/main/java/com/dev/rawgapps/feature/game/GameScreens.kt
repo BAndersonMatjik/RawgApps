@@ -73,7 +73,7 @@ fun GameScreen(
     }
 
     Scaffold(topBar={
-        DefaultToolbar(title = "Rawg Game", onFavoriteClick = navigateToFavorite)
+        DefaultToolbar(title = "Rawg Games", onFavoriteClick = navigateToFavorite)
     }) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -81,7 +81,7 @@ fun GameScreen(
             SearchTextField(
                 modifier = Modifier
                     .padding(horizontal = 10.dp, vertical = 6.dp),
-                hint = "Search Game",
+                hint = "Search Games",
                 onTextChange = onSearchTextChange
             )
             LazyColumn(
