@@ -5,5 +5,5 @@ import com.dev.rawgapps.domain.Game
 import kotlinx.coroutines.flow.Flow
 
 interface GetGamesUsecase {
-    suspend operator fun invoke(): Flow<PagingData<Game>>
+    suspend operator fun invoke(keyword:String): Flow<PagingData<Game>>
 }

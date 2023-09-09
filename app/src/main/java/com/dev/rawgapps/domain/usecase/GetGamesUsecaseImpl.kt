@@ -6,10 +6,12 @@ import com.dev.rawgapps.domain.Game
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Provider
 
 @ViewModelScoped
-class GetGamesUsecaseImpl @Inject constructor(private val rawgRepository: RawgRepository):GetGamesUsecase {
-    override suspend fun invoke(): Flow<PagingData<Game>> {
-       return rawgRepository.getGames()
+class GetGamesUsecaseImpl @Inject constructor(private val rawgRepository: Provider<RawgRepository>):GetGamesUsecase {
+    private var lastKeyword = ""
+    override suspend fun invoke(keyword: String): Flow<PagingData<Game>> {
+       return rawgRepository.get().getGames(keyword)
     }
 }

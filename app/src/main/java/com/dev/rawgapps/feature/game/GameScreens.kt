@@ -31,13 +31,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 internal fun GameRoute(
     viewModel: GameViewModel = hiltViewModel(),
     navigateToFavorite: () -> Unit = {},
-    navigateToDetailGame: (Game) -> Unit = {}
+    navigateToDetailGame: (Game) -> Unit = {},
 ) {
     val gamePagingItems: LazyPagingItems<Game> = viewModel.gamesState.collectAsLazyPagingItems()
     GameScreen(
         gamePagingItems = gamePagingItems,
         navigateToFavorite = navigateToFavorite,
-        navigateToDetailGame = navigateToDetailGame
+        navigateToDetailGame = navigateToDetailGame,
+        onSearchTextChange ={
+            viewModel.onEvent(GameViewModel.GameEvent.SearchGames(it))
+        }
     )
 }
 
@@ -46,14 +49,16 @@ internal fun GameRoute(
 fun GameScreen(
     gamePagingItems: LazyPagingItems<Game>,
     navigateToFavorite: () -> Unit = {},
-    navigateToDetailGame: (Game) -> Unit = {}
+    navigateToDetailGame: (Game) -> Unit = {},
+    onSearchTextChange:(String)->Unit= {}
 ) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         DefaultToolbar(title = "Rawg Game", onFavoriteClick = navigateToFavorite)
         SearchTextField(
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-            hint = "Search Game"
+            hint = "Search Game",
+            onTextChange = onSearchTextChange
         )
         LazyColumn(
             contentPadding = PaddingValues(8.dp),
@@ -75,7 +80,8 @@ fun GameScreen(
                     }
 
                     loadState.refresh is LoadState.Error -> {
-                        item { Text(text = "error") }
+                        val error = gamePagingItems.loadState.refresh as LoadState.Error
+                        item { Text(text = "error ${error.error.message.toString()}") }
                     }
 
                     loadState.append is LoadState.Loading -> {
