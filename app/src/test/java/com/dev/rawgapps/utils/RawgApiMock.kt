@@ -13,7 +13,7 @@ import io.ktor.http.headersOf
 
 class RawgApiMock {
     val engine = MockEngine {
-        handleRequest(it) ?:handleBadRequest(it)
+        handleRequest(it) ?:handleBadRequest()
     }
 
     private fun MockRequestHandleScope.handleRequest(
@@ -31,7 +31,6 @@ class RawgApiMock {
             //list
             content = ResourceUtils.getResource2String("games.json")?:""
         }
-
         return respond(
             content = content,
             status = HttpStatusCode.OK,
@@ -40,9 +39,7 @@ class RawgApiMock {
 
     }
 
-    private fun MockRequestHandleScope.handleBadRequest(
-        request: HttpRequestData
-    ): HttpResponseData {
+    private fun MockRequestHandleScope.handleBadRequest(): HttpResponseData {
 
         return respond(
             content = "",
