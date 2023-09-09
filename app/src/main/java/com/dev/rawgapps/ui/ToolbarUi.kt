@@ -10,7 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +24,7 @@ import com.dev.rawgapps.common.CustomFontFamily
 @Composable
 fun DefaultToolbar(title: String, color: Color = CustomColor.NavyBlue, onFavoriteClick: (() -> Unit)={}) {
     TopAppBar(
-        title = { Text(text = title.uppercase(), color = Color.White, fontFamily = CustomFontFamily.InterFontFamily, fontWeight = FontWeight.Bold) },
+        title = { Text(text = title.uppercase(), modifier = Modifier.semantics { contentDescription=title.uppercase() }, color = Color.White, fontFamily = CustomFontFamily.InterFontFamily, fontWeight = FontWeight.Bold) },
         actions = {
             IconButton(onClick = onFavoriteClick) {
                 Icon(imageVector = Icons.Filled.Favorite, tint = Color.White, contentDescription = "Icon Favorite")
