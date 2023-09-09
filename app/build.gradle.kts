@@ -49,6 +49,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
+    testOptions {
+
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -88,9 +94,18 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
 
+    testImplementation(libs.roboelectric)
     testImplementation(libs.junit)
     testImplementation(libs.ktor.client.mock)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.ui.test.junit4)
+
+    testImplementation (libs.mockk.android)
+    testImplementation (libs.mockk.agent)
+    // For Robolectric tests.
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.android.compiler)
+    testImplementation(libs.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
@@ -103,8 +118,8 @@ koverReport {
     filters {
         excludes {
             packages(
-                "dagger.hilt.internal.aggregatedroot.codegen.*",
-                "hilt_aggregated_deps.*",
+                "dagger.hilt.internal.aggregatedroot.codegen*",
+                "hilt_aggregated_deps*",
                 "com.dev.rawgapps.*.di.*",
                 "com.dev.rawgapps.*.Hilt_*",
                 "com.dev.rawgapps.*.*_Factory*",
