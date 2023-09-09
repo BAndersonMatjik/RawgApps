@@ -94,6 +94,7 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
 
+    testImplementation(libs.paging.testing)
     testImplementation(libs.roboelectric)
     testImplementation(libs.junit)
     testImplementation(libs.ktor.client.mock)
