@@ -17,7 +17,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.dev.rawgapps.common.DevicePreviews
+import com.dev.rawgapps.common.PhonePreviews
 import com.dev.rawgapps.common.ui.GameScreenPreviewParameterProvider
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.ui.DefaultToolbar
@@ -93,7 +93,7 @@ fun GameScreen(
 }
 
 
-@DevicePreviews()
+@PhonePreviews()
 @Composable
 fun GameScreenPreview(@PreviewParameter(GameScreenPreviewParameterProvider::class) gamePagingItems:MutableStateFlow<PagingData<Game>>) {
     RawgAppsTheme {
