@@ -1,6 +1,7 @@
 [versions]
 agp = "8.1.0"
 hilt-android-testing = "2.47"
+kotlinx-coroutines-test = "org-jetbrains-kotlin-android"
 mockk = "1.37.1"
 mockk-agent = "1.13.7"
 mockk-android = "1.13.7"
@@ -24,6 +25,7 @@ hilt-navigation="1.0.0"
 kover="0.7.3"
 kotlinx-coroutine-test="1.7.1"
 roboelectric = "4.10.3"
+turbine = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -37,6 +39,7 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk-agent" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk-android" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

@@ -99,6 +99,7 @@ dependencies {
     testImplementation(libs.ktor.client.mock)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.ui.test.junit4)
+    testImplementation(libs.turbine)
 
     testImplementation (libs.mockk.android)
     testImplementation (libs.mockk.agent)
