@@ -19,38 +19,47 @@ import kotlinx.serialization.json.Json
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = DestinationRoute.GameScreen.route, builder = {
-        composable(DestinationRoute.GameScreen.route){
-            GameRoute(navigateToFavorite = {
-                navController.navigate(DestinationRoute.FavoriteGameScreen.route)
-            }, navigateToDetailGame = {
-                val json = Json.encodeToString(it)
-                val detailGameRoute = DestinationRoute.DetailGameScreen.route.replace(oldValue = "{slug}", newValue = it.slug).replace(oldValue = "{game}", newValue = json)
-                navController.navigate(detailGameRoute)
-            })
-        }
-        composable(DestinationRoute.DetailGameScreen.route, arguments = listOf(
-            navArgument("slug") {
-            type = NavType.StringType
-        },
-            navArgument("game") {
-            type = GameParamType()
-        }),){
-            val slug = it.arguments?.getString("slug")
-            val game = it.arguments?.getParcelable<Game>("game")
-            DetailGameScreen(
-                game =game, slug = slug
-            )
-        }
-        composable(DestinationRoute.FavoriteGameScreen.route){
-            FavoriteGameScreen()
-        }
-    })
+    NavHost(
+        navController = navController,
+        startDestination = DestinationRoute.GameScreen.route,
+        builder = {
+            composable(DestinationRoute.GameScreen.route) {
+                GameRoute(navigateToFavorite = {
+                    navController.navigate(DestinationRoute.FavoriteGameScreen.route)
+                }, navigateToDetailGame = {
+                    val json = Json.encodeToString(it)
+                    val detailGameRoute = DestinationRoute.DetailGameScreen.route.replace(
+                        oldValue = "{slug}",
+                        newValue = it.slug
+                    ).replace(oldValue = "{game}", newValue = json)
+                    navController.navigate(detailGameRoute)
+                })
+            }
+            composable(
+                DestinationRoute.DetailGameScreen.route,
+                arguments = listOf(
+                    navArgument("slug") {
+                        type = NavType.StringType
+                    },
+                    navArgument("game") {
+                        type = GameParamType()
+                    }),
+            ) {
+                val slug = it.arguments?.getString("slug")
+                val game = it.arguments?.getParcelable<Game>("game")
+                DetailGameScreen(
+                    game = game, slug = slug
+                )
+            }
+            composable(DestinationRoute.FavoriteGameScreen.route) {
+                FavoriteGameScreen()
+            }
+        })
 }
 
 @Composable
 @Preview(showBackground = true, device = Devices.NEXUS_5)
-fun MainScreenPreview(){
+fun MainScreenPreview() {
     val navController = rememberNavController()
     MainScreen(navController = navController)
 }
