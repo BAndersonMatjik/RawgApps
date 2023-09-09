@@ -12,5 +12,6 @@ data class Game(
     val genre:List<String>,
     val released:String,
     val backgroundImage:String,
-    val description:String
+    val description:String,
+    val developer:String
 ):Parcelable
