@@ -31,13 +31,8 @@ class GameViewModel @Inject constructor(private val getGamesUsecase: GetGamesUse
                 is GameEvent.GetGames -> {
                     getGamesAllOrSearch("")
                 }
-
                 is GameEvent.SearchGames -> {
                     getGamesAllOrSearch(keyword = event.keyword)
-                }
-
-                else -> {
-                    TODO("NEED HANDLE")
                 }
             }
         }
