@@ -14,3 +14,4 @@ abstract class RemoteDataSourceModule {
     @Binds
     abstract fun bindsRawgRemoteDataSource(rawgRemoteDataSourceImpl: RawgRemoteDataSourceImpl):RawgRemoteDataSource
 }
+
