@@ -29,21 +29,20 @@ fun MainScreen(navController: NavHostController) {
                 navController.navigate(detailGameRoute)
             })
         }
-        composable(DestinationRoute.FavoriteGameScreen.route, arguments = listOf(
+        composable(DestinationRoute.DetailGameScreen.route, arguments = listOf(
             navArgument("slug") {
             type = NavType.StringType
         },
             navArgument("game") {
             type = GameParamType()
         }),){
-
             val slug = it.arguments?.getString("slug")
-            val game =  navController.previousBackStackEntry?.arguments?.getParcelable<Game>("game")
+            val game = it.arguments?.getParcelable<Game>("game")
             DetailGameScreen(
                 game =game, slug = slug
             )
         }
-        composable(DestinationRoute.DetailGameScreen.route){
+        composable(DestinationRoute.FavoriteGameScreen.route){
             FavoriteGameScreen()
         }
     })
