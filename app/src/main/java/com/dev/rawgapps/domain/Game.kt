@@ -13,5 +13,6 @@ data class Game(
     val released:String,
     val backgroundImage:String,
     val description:String,
-    val developer:String
+    val developer:String,
+    val isFavorite:Boolean=false
 ):Parcelable
