@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite_game", indices = [Index(value = ["name"], unique = true)])
+@Entity(tableName = "favorite_game", indices = [Index(value = ["slag"], unique = true)])
 data class FavoriteGameEntity(
     @PrimaryKey
     val id:String,
