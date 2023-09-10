@@ -23,6 +23,7 @@ import com.dev.rawgapps.common.CustomFontFamily
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.ui.ToolbarImageView
 import com.dev.rawgapps.ui.theme.RawgAppsTheme
+import timber.log.Timber
 
 
 @Composable
@@ -38,13 +39,18 @@ internal fun DetailGameRoute(
             onEvent(DetailGameViewModel.DetailGameEvent.GetDetailGame(slug))
         }
     }
-    DetailGameScreen(navigateBack = navigateBack, uiState = viewModel.uiState.value)
+    DetailGameScreen(onBackClick = navigateBack, onFavoriteClick = {
+        //event send flag is my favorite
+        viewModel.onEvent(DetailGameViewModel.DetailGameEvent.SaveIsFavorite)
+        Timber.d("Click Favorite")
+    }, uiState = viewModel.uiState.value)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailGameScreen(
-    navigateBack: () -> Unit = {},
+    onBackClick: () -> Unit = {},
+    onFavoriteClick: () -> Unit = {},
     uiState: DetailGameViewModel.DetailGameViewState = DetailGameViewModel.DetailGameViewState()
 ) {
     val game = uiState.game
@@ -54,9 +60,11 @@ fun DetailGameScreen(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             ToolbarImageView(
-                isFavorite = uiState.isFavorite,
+                isFavorite = uiState.game.isFavorite,
                 imageUrl = uiState.game.backgroundImage,
-                modifier = Modifier.height(200.dp)
+                modifier = Modifier.height(200.dp),
+                onBackClick = onBackClick,
+                onFavoriteClick = onFavoriteClick
             )
         }
         item {
@@ -115,7 +123,7 @@ fun DetailGameScreenPreview() {
     RawgAppsTheme {
         DetailGameScreen(
             uiState = DetailGameViewModel.DetailGameViewState(
-                isLoading = false, isFavorite = false, errorFetchDetailGame = "", game = Game(
+                isLoading = false, errorFetchDetailGame = "", game = Game(
                     slug = "GTA-V",
                     name = "GTA V",
                     genres = listOf("Action", "Rpg"),
