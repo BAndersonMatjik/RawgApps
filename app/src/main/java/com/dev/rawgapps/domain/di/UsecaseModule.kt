@@ -1,5 +1,7 @@
 package com.dev.rawgapps.domain.di
 
+import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecase
+import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecaseImpl
 import com.dev.rawgapps.domain.usecase.GetDetailGameUsecase
 import com.dev.rawgapps.domain.usecase.GetDetailUsecaseImpl
 import com.dev.rawgapps.domain.usecase.GetGamesUsecase
@@ -17,4 +19,6 @@ abstract class UsecaseModule {
 
     @Binds
     abstract fun bindGetDetailGameUsecase(getDetailUsecaseImpl: GetDetailUsecaseImpl):GetDetailGameUsecase
+    @Binds
+    abstract fun bindAddFavoritegameUsecase(addFavoriteGameUsecase: AddFavoriteGameUsecaseImpl):AddFavoriteGameUsecase
 }
