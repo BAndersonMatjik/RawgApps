@@ -1,12 +1,8 @@
 package com.dev.rawgapps.data.di
 
 import android.content.Context
-import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase
-
 import com.dev.rawgapps.data.local.config.RawgDatabase
-import com.dev.rawgapps.data.local.model.FavoriteGameEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +18,7 @@ object RoomModule {
     fun provideRoomDatabase(@ApplicationContext context:Context): RawgDatabase = Room.databaseBuilder(context,RawgDatabase::class.java,RawgDatabase.DB_NAME)
             .fallbackToDestructiveMigration()
             .build()
-
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(database: RawgDatabase)=database.favoriteDao()
 }
