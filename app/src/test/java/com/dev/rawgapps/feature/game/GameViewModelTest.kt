@@ -43,7 +43,8 @@ class GameViewModelTest {
                                 genres = listOf(),
                                 released = "cam",
                                 backgroundImage = "nam",
-                                description = "commune"
+                                description = "commune",
+                                developer = ""
                             ),
                             Game(
                                 slug = "doctus",
@@ -51,7 +52,8 @@ class GameViewModelTest {
                                 genres = listOf(),
                                 released = "movet",
                                 backgroundImage = "movet",
-                                description = "animal"
+                                description = "animal",
+                                developer = ""
                             )
                         )
                     )
@@ -81,7 +83,8 @@ class GameViewModelTest {
                                 genres = listOf(),
                                 released = "cam",
                                 backgroundImage = "nam",
-                                description = "commune"
+                                description = "commune",
+                                developer = ""
                             )
                         )
                     )
