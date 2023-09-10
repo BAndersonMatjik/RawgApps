@@ -5,18 +5,18 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.dev.rawgapps.domain.Game
+import com.dev.rawgapps.data.local.model.FavoriteGameEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg game: Game)
+    fun insertAll(vararg game: FavoriteGameEntity)
 
     @Delete
-    fun delete(game:Game)
+    fun delete(game:FavoriteGameEntity)
 
     @Query("SELECT * FROM favorite_game WHERE slag = :slag")
-    suspend fun findBySlag(slag:String): Flow<Game>
+    fun findBySlag(slag:String): Flow<FavoriteGameEntity>
 }
