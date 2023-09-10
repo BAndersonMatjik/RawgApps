@@ -16,8 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -74,9 +72,6 @@ fun DetailContentToolbar(
     onBackClick: () -> Unit = {},
     onFavoriteClick: (() -> Unit) = {}
 ) {
-    val isFavorite = remember {
-        mutableStateOf(isFavorite)
-    }
     TopAppBar(
         title = { },
         navigationIcon = {
@@ -90,7 +85,7 @@ fun DetailContentToolbar(
         },
         actions = {
             IconButton(onClick = onFavoriteClick) {
-                if (isFavorite.value) {
+                if (isFavorite) {
                     Icon(
                         imageVector = Icons.Outlined.Favorite,
                         tint = Color.White,
