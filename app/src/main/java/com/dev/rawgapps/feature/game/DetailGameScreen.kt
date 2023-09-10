@@ -38,13 +38,14 @@ internal fun DetailGameRoute(
 @Composable
 fun DetailGameScreen(
     game: Game,
-    slug: String
+    slug: String,
+    isFavorite:Boolean = false
 ) {
     var isFavorite = remember {
         mutableStateOf(false)
     }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        item { ToolbarImageView(isFavorite=isFavorite.value,modifier = Modifier.height(200.dp)) }
+        item { ToolbarImageView(isFavorite=isFavorite.value, imageUrl = game.backgroundImage,modifier = Modifier.height(200.dp)) }
         item {
             Column(modifier = Modifier
                 .fillMaxWidth()
