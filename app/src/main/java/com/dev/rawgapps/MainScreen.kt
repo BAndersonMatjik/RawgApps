@@ -53,7 +53,10 @@ fun MainScreen(navController: NavHostController) {
                     ShowToastWithComposable(message = "Failed To Found Game Detail")
                 }else{
                     DetailGameRoute(
-                        game = game!!, slug = slug!!
+                        game = game!!, slug = slug!!,
+                        navigateBack = {
+                            navController.navigateUp()
+                        }
                     )
                 }
             }
