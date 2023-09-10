@@ -4,18 +4,22 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.dev.rawgapps.common.Constants
+import com.dev.rawgapps.data.local.datasource.RawgLocalDataSource
 import com.dev.rawgapps.data.remote.datasource.GamePagingDataSource
 import com.dev.rawgapps.data.remote.datasource.PageDataSourceFacade
 import com.dev.rawgapps.data.remote.datasource.RawgRemoteDataSource
 import com.dev.rawgapps.domain.Game
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @ViewModelScoped
 class RawgRepositoryImpl @Inject constructor(
     private val gamePageDataSourceFacade: PageDataSourceFacade<GamePagingDataSource>,
-    private val gameRemoteDataSource: RawgRemoteDataSource
+    private val gameRemoteDataSource: RawgRemoteDataSource,
+    private val gameLocalDataSource: RawgLocalDataSource
 ) : RawgRepository {
     override suspend fun getGames(keyword: String): Flow<PagingData<Game>> {
         return Pager(
@@ -26,7 +30,17 @@ class RawgRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getGame(slug: String): Result<Game> {
-        return gameRemoteDataSource.getGameDetail(slug)
+    override suspend fun getGame(slug: String): Flow<Result<Game>> {
+        return flow {
+            emit(gameRemoteDataSource.getGameDetail(slug))
+        }
     }
+
+    override suspend fun getGameFavorite(slug: String): Flow<Result<Game>> {
+        return gameLocalDataSource.getGameBySlag(slag = slug).map {
+            Result.success(it)
+        }
+    }
+
+
 }

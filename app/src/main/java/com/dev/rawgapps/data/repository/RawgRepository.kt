@@ -7,5 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface RawgRepository {
     suspend fun getGames(keyword:String): Flow<PagingData<Game>>
 
-    suspend fun getGame(slug:String):Result<Game>
+    suspend fun getGame(slug:String):Flow<Result<Game>>
+
+    suspend fun getGameFavorite(slug:String):Flow<Result<Game>>
 }
