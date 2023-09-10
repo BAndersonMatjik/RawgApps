@@ -5,7 +5,7 @@ import io.ktor.http.URLBuilder
 import io.ktor.http.Url
 
 object UrlUtils {
-    fun createRequestUrl(endPoint:String,parameterBuilder:(ParametersBuilder)->Unit): Url {
+    fun createRequestUrl(endPoint:String,parameterBuilder:(ParametersBuilder)->Unit={}): Url {
         val urlBuilder = URLBuilder()
         urlBuilder.path(endPoint)
         urlBuilder.parameters.apply {
