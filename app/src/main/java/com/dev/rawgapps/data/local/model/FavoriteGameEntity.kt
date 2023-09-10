@@ -9,8 +9,8 @@ import androidx.room.PrimaryKey
 data class FavoriteGameEntity(
     @PrimaryKey
     val id:String,
-    @ColumnInfo(name = "name")
-    val name:String,
+    @ColumnInfo(name = "slag")
+    val slag:String,
     @ColumnInfo(name = "json_content")
     val jsonContent:String
 )

@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.dev.rawgapps.domain.Game
 import kotlinx.coroutines.flow.Flow
 
-@Dao()
+@Dao
 interface FavoriteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
