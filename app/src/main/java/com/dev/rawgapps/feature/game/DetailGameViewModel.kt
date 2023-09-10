@@ -41,7 +41,7 @@ class DetailGameViewModel @Inject constructor(
                 }
 
                 is DetailGameEvent.SaveIsFavorite->{
-                    _uiState.value = _uiState.value.copy(isFavorite = !_uiState.value.isFavorite)
+                    _uiState.value = _uiState.value.copy(game = _uiState.value.game.copy(isFavorite = !_uiState.value.game.isFavorite))
                 }
 
                 else -> {}
@@ -57,7 +57,6 @@ class DetailGameViewModel @Inject constructor(
 
     data class DetailGameViewState(
         val isLoading: Boolean = false,
-        val isFavorite: Boolean = false,
         val errorFetchDetailGame: String = "",
         val game: Game = Game(
             slug = "",
@@ -69,6 +68,5 @@ class DetailGameViewModel @Inject constructor(
             developer = ""
         ),
     )
-
 
 }
