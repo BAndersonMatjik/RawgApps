@@ -27,6 +27,6 @@ class RawgRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getGame(slug: String): Result<Game> {
-        TODO("Not yet implemented")
+        return gameRemoteDataSource.getGameDetail(slug)
     }
 }
