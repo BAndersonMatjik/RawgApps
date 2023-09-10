@@ -40,7 +40,7 @@ class GameViewModelTest {
                             Game(
                                 slug = "suas",
                                 name = "Susanna Farley",
-                                genre = listOf(),
+                                genres = listOf(),
                                 released = "cam",
                                 backgroundImage = "nam",
                                 description = "commune"
@@ -48,7 +48,7 @@ class GameViewModelTest {
                             Game(
                                 slug = "doctus",
                                 name = "Darren Donaldson",
-                                genre = listOf(),
+                                genres = listOf(),
                                 released = "movet",
                                 backgroundImage = "movet",
                                 description = "animal"
@@ -78,7 +78,7 @@ class GameViewModelTest {
                             Game(
                                 slug = "suas",
                                 name = "Susanna Farley",
-                                genre = listOf(),
+                                genres = listOf(),
                                 released = "cam",
                                 backgroundImage = "nam",
                                 description = "commune"

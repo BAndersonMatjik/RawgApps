@@ -16,7 +16,7 @@ class GameScreenPreviewParameterProvider :
                             Game(
                                 slug = "class",
                                 name = "Rita Freeman",
-                                genre = listOf("RPG", "ACTION"),
+                                genres = listOf("RPG", "ACTION"),
                                 released = "vis",
                                 backgroundImage = "tractatos",
                                 description = "lacus",
@@ -24,7 +24,7 @@ class GameScreenPreviewParameterProvider :
                             ), Game(
                                 slug = "class",
                                 name = "Rita Freeman",
-                                genre = listOf("RPG", "ACTION"),
+                                genres = listOf("RPG", "ACTION"),
                                 released = "vis",
                                 backgroundImage = "tractatos",
                                 description = "lacus",

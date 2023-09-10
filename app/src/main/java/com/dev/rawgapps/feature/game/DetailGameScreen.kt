@@ -64,7 +64,7 @@ fun DetailGameScreen(
                     style = MaterialTheme.typography.labelSmall
                 )
                 Text(
-                    text = "Genres: ${game.genre.joinToString()}",
+                    text = "Genres: ${game.genres.joinToString()}",
                     fontFamily = CustomFontFamily.InterFontFamily,
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.labelSmall
@@ -102,7 +102,7 @@ fun DetailGameScreenPreview() {
             game = Game(
                 slug = "comprehensam",
                 name = "Vampire: The Masquerade - Bloodlines 2",
-                genre = listOf("action","RPG"),
+                genres = listOf("action","RPG"),
                 released = "Desember 31,2022",
                 backgroundImage = "minim",
                 description = "Sired in an act of vampire insurrection, your existence ignites the war for Seattle's blood trade. Enter uneasy alliances with the creatures who control the city and uncover the sprawling conspiracy which plunged Seattle into a bloody civil war between powerful vampire factions. ♞Become the Ultimate Vampire Immerse yourself in the World of Darkness and live out your vampire fantasy in a city filled with intriguing characters that react to your choices. You and your unique disciplines are a weapon in our forward-driving, fast-moving, melee-focussed combat system. Your power will grow as you advance, but remember to uphold the Masquerade and guard your humanity... or face the consequences.",

@@ -3,6 +3,7 @@ package com.dev.rawgapps.data.remote.datasource
 import androidx.annotation.WorkerThread
 import com.dev.rawgapps.common.UrlUtils.createRequestUrl
 import com.dev.rawgapps.data.remote.ApiRoutes
+import com.dev.rawgapps.data.remote.model.GameDetailResponse
 import com.dev.rawgapps.data.remote.model.GamesResponse
 import com.dev.rawgapps.domain.Game
 import io.ktor.client.HttpClient
@@ -26,7 +27,7 @@ class RawgRemoteDataSourceImpl @Inject constructor(private val httpClient: HttpC
         val result = kotlin.runCatching {
             httpClient.get<GamesResponse>(url).let {gamesResponse->
                 gamesResponse.results?.map {
-                    Game(it.slug?:"",it.name?:"", genre = it.genres?.map { it.name?:"" }?: listOf(), released = it.released?:"", backgroundImage = it.backgroundImage?:"", description = "", developer = "")
+                    Game(it.slug?:"",it.name?:"", genres = it.genres?.map { it.name?:"" }?: listOf(), released = it.released?:"", backgroundImage = it.backgroundImage?:"", description = "", developer = "")
                 }?: listOf()
             }
         }
@@ -34,7 +35,21 @@ class RawgRemoteDataSourceImpl @Inject constructor(private val httpClient: HttpC
     }
     @WorkerThread
     override suspend fun getGameDetail(slug: String): Result<Game> {
-        TODO("Not yet implemented")
+        val url = createRequestUrl(ApiRoutes.ENDPOINT_GAMES_DETAIL.replace(oldValue = "{slug}", newValue = slug))
+        val result = kotlin.runCatching {
+            httpClient.get<GameDetailResponse>(url).let {response->
+                Game(
+                    slug = response.slug?:"",
+                    name = response.name?:"",
+                    genres = response.genres?.map { it.name?:"" }?: listOf(),
+                    released = response.released?:"",
+                    backgroundImage = response.backgroundImage?:"",
+                    description = response.description?:"",
+                    developer = response.developers?.map { it.name?:"" }?.joinToString()?:""
+                )
+            }
+        }
+        return result
     }
 
 

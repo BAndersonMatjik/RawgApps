@@ -45,8 +45,8 @@ fun MainScreen(navController: NavHostController) {
                         type = GameParamType()
                     }),
             ) {
-                val slug = it.arguments?.getString("slug")
-                val game = it.arguments?.getParcelable<Game>("game")
+                val slug = it.arguments?.getString("slug")!!
+                val game = it.arguments?.getParcelable<Game>("game")!!
                 DetailGameScreen(
                     game = game, slug = slug
                 )

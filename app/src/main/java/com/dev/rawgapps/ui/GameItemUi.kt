@@ -86,7 +86,7 @@ fun GameCard(
                 style = MaterialTheme.typography.labelSmall
             )
             Text(
-                text = "Genres: ${game.genre.joinToString()}",
+                text = "Genres: ${game.genres.joinToString()}",
                 fontFamily = CustomFontFamily.InterFontFamily,
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.labelSmall
@@ -109,7 +109,7 @@ fun GameCardPreview() {
     val fake = Game(
         slug = "GTA-V",
         name = "GTA V",
-        genre = listOf("Action", "Rpg"),
+        genres = listOf("Action", "Rpg"),
         released = "2013-09-17",
         backgroundImage = "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
         description = "?",
