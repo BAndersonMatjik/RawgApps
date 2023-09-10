@@ -12,7 +12,6 @@ import com.dev.rawgapps.domain.Game
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -37,9 +36,7 @@ class RawgRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getGameFavorite(slug: String): Flow<Result<Game>> {
-        return gameLocalDataSource.getGameBySlag(slag = slug).map {
-            Result.success(it)
-        }
+        return gameLocalDataSource.getGameBySlag(slag = slug)
     }
 
 
