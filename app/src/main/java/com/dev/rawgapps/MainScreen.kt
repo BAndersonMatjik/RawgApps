@@ -1,6 +1,8 @@
 package com.dev.rawgapps
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -12,7 +14,7 @@ import androidx.navigation.navArgument
 import com.dev.rawgapps.common.ui.GameParamType
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.feature.favoritegame.FavoriteGameScreen
-import com.dev.rawgapps.feature.game.DetailGameScreen
+import com.dev.rawgapps.feature.game.DetailGameRoute
 import com.dev.rawgapps.feature.game.GameRoute
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -45,17 +47,27 @@ fun MainScreen(navController: NavHostController) {
                         type = GameParamType()
                     }),
             ) {
-                val slug = it.arguments?.getString("slug")!!
-                val game = it.arguments?.getParcelable<Game>("game")!!
-                DetailGameScreen(
-                    game = game, slug = slug
-                )
+                val slug = it.arguments?.getString("slug")
+                val game = it.arguments?.getParcelable<Game>("game")
+                if (slug.isNullOrBlank() && game==null){
+                    ShowToastWithComposable(message = "Failed To Found Game Detail")
+                }else{
+                    DetailGameRoute(
+                        game = game!!, slug = slug!!
+                    )
+                }
             }
             composable(DestinationRoute.FavoriteGameScreen.route) {
                 FavoriteGameScreen()
             }
         })
 }
+
+@Composable
+fun ShowToastWithComposable(message:String, duration:Int=Toast.LENGTH_SHORT){
+    Toast.makeText(LocalContext.current,message,duration).show()
+}
+
 
 @Composable
 @Preview(showBackground = true, device = Devices.NEXUS_5)
