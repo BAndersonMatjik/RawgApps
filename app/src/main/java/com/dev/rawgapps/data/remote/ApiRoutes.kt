@@ -5,4 +5,5 @@ object ApiRoutes {
     const val API_KEY = "e3078a9167444ca49a529d0e6f3bdff2"
 
     const val ENDPOINT_GAMES = "games"
+    const val ENDPOINT_GAMES_DETAIL = "games/{slug}"
 }
