@@ -64,7 +64,8 @@ fun DetailGameScreen(
                 imageUrl = uiState.game.backgroundImage,
                 modifier = Modifier.height(200.dp),
                 onBackClick = onBackClick,
-                onFavoriteClick = onFavoriteClick
+                onFavoriteClick = onFavoriteClick,
+                showFavoriteIcon = uiState.showFavoriteIcon
             )
         }
         item {
