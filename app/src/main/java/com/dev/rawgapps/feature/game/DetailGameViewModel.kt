@@ -25,15 +25,23 @@ class DetailGameViewModel @Inject constructor(
                     _uiState.value = _uiState.value.copy(isLoading = true)
                     getDetailGameUseCase(event.slug).collectLatest {
                         it.fold(onSuccess = {
-                           _uiState.value=  _uiState.value.copy(isLoading = false, game = it)
+                            _uiState.value = _uiState.value.copy(isLoading = false, game = it)
                         }, onFailure = {
-                            _uiState.value= _uiState.value.copy(isLoading = false, errorFetchDetailGame = it.message.toString())
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                errorFetchDetailGame = it.message.toString()
+                            )
                         }
                         )
                     }
                 }
-                is DetailGameEvent.Init->{
+
+                is DetailGameEvent.Init -> {
                     _uiState.value = _uiState.value.copy(game = event.game)
+                }
+
+                is DetailGameEvent.SaveIsFavorite->{
+                    _uiState.value = _uiState.value.copy(isFavorite = !_uiState.value.isFavorite)
                 }
 
                 else -> {}
@@ -42,14 +50,15 @@ class DetailGameViewModel @Inject constructor(
     }
 
     sealed interface DetailGameEvent {
-        data class Init(val game:Game): DetailGameEvent
+        data class Init(val game: Game) : DetailGameEvent
         data class GetDetailGame(val slug: String) : DetailGameEvent
+        object SaveIsFavorite : DetailGameEvent
     }
 
     data class DetailGameViewState(
         val isLoading: Boolean = false,
-        val isFavorite:Boolean = false,
-        val errorFetchDetailGame:String = "",
+        val isFavorite: Boolean = false,
+        val errorFetchDetailGame: String = "",
         val game: Game = Game(
             slug = "",
             name = "",
