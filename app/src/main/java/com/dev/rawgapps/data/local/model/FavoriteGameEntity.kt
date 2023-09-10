@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_game", indices = [Index(value = ["slag"], unique = true)])
 data class FavoriteGameEntity(
-    @PrimaryKey
-    val id:String,
+    @PrimaryKey(true)
+    val id:String?,
     @ColumnInfo(name = "slag")
     val slag:String,
     @ColumnInfo(name = "json_content")
