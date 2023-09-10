@@ -39,5 +39,12 @@ class RawgRepositoryImpl @Inject constructor(
         return gameLocalDataSource.getGameBySlag(slag = slug)
     }
 
+    override suspend fun addFavoriteGame(game: Game) {
+        gameLocalDataSource.addFavoriteGame(game)
+    }
+
+    override suspend fun removeFavoriteGame(slug: String) {
+        gameLocalDataSource.deleteFavoriteGame(slug)
+    }
 
 }

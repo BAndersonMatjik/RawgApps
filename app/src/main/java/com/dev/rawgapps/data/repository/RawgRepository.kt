@@ -10,4 +10,7 @@ interface RawgRepository {
     suspend fun getGame(slug:String):Flow<Result<Game>>
 
     suspend fun getGameFavorite(slug:String):Flow<Result<Game>>
+
+    suspend fun addFavoriteGame(game: Game)
+    suspend fun removeFavoriteGame(slug: String)
 }
