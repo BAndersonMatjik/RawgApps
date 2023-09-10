@@ -70,7 +70,8 @@ fun DetailContentToolbar(
     isFavorite: Boolean = false,
     color: Color = Color.Transparent,
     onBackClick: () -> Unit = {},
-    onFavoriteClick: (() -> Unit) = {}
+    onFavoriteClick: (() -> Unit) = {},
+    showFavoriteIcon:Boolean =false
 ) {
     TopAppBar(
         title = { },
@@ -85,18 +86,20 @@ fun DetailContentToolbar(
         },
         actions = {
             IconButton(onClick = onFavoriteClick) {
-                if (isFavorite) {
-                    Icon(
-                        imageVector = Icons.Outlined.Favorite,
-                        tint = Color.White,
-                        contentDescription = "Icon Favorite"
-                    )
-                } else {
-                    Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        tint = Color.White,
-                        contentDescription = "Icon Favorite"
-                    )
+                if (showFavoriteIcon){
+                    if (isFavorite) {
+                        Icon(
+                            imageVector = Icons.Outlined.Favorite,
+                            tint = Color.White,
+                            contentDescription = "Icon Favorite"
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Outlined.FavoriteBorder,
+                            tint = Color.White,
+                            contentDescription = "Icon Favorite"
+                        )
+                    }
                 }
             }
         },
@@ -114,7 +117,8 @@ fun ToolbarImageView(
     onFavoriteClick: (() -> Unit) = {},
     imageUrl: String = "",
     contentDescription: String = "",
-    isFavorite: Boolean = false
+    isFavorite: Boolean = false,
+    showFavoriteIcon:Boolean=false,
 ) {
     Box(modifier = modifier) {
         AsyncImage(
@@ -132,7 +136,8 @@ fun ToolbarImageView(
         DetailContentToolbar(
             isFavorite = isFavorite,
             onBackClick = onBackClick,
-            onFavoriteClick = onFavoriteClick
+            onFavoriteClick = onFavoriteClick,
+            showFavoriteIcon = showFavoriteIcon
         )
     }
 }
