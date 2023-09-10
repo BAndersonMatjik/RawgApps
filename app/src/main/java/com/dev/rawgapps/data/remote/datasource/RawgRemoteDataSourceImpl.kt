@@ -1,6 +1,7 @@
 package com.dev.rawgapps.data.remote.datasource
 
 import androidx.annotation.WorkerThread
+import androidx.core.text.HtmlCompat
 import com.dev.rawgapps.common.DateFormatter
 import com.dev.rawgapps.common.UrlUtils.createRequestUrl
 import com.dev.rawgapps.data.remote.ApiRoutes
@@ -68,7 +69,7 @@ class RawgRemoteDataSourceImpl @Inject constructor(private val httpClient: HttpC
                     genres = response.genres?.map { it.name ?: "" } ?: listOf(),
                     released = DateFormatter.formatDate(response.released ?: ""),
                     backgroundImage = response.backgroundImage ?: "",
-                    description = response.description?.replace("/<[^>]+>/g", "") ?: "",
+                    description = HtmlCompat.fromHtml(response.description?:"",HtmlCompat.FROM_HTML_MODE_LEGACY).toString(),
                     developer = response.developers?.map { it.name ?: "" }?.joinToString() ?: ""
                 )
             }
