@@ -19,4 +19,7 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM favorite_game WHERE slag = :slag")
     fun findBySlag(slag:String): Flow<FavoriteGameEntity?>
+
+    @Query("DELETE FROM favorite_game WHERE slag = :slug")
+    fun deleteBySlag(slug: String)
 }
