@@ -103,7 +103,6 @@ fun DetailContentToolbar(
                         contentDescription = "Icon Favorite"
                     )
                 }
-                isFavorite.value = !isFavorite.value
             }
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
