@@ -30,7 +30,7 @@ data class GameDetailResponse(
     @SerialName("dominant_color")
     val dominantColor: String?=null,
     @SerialName("esrb_rating")
-    val esrbRating: String?=null,
+    val esrbRating: EsrbRating?=null,
     @SerialName("game_series_count")
     val gameSeriesCount: Int?=null,
     @SerialName("genres")
