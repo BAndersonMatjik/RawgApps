@@ -33,7 +33,7 @@ fun FavoriteGameRoute(
     navigateBack: () -> Unit = {}
 ) {
     val gamesFavorite = mViewModel.gamesState.collectAsLazyPagingItems()
-    FavoriteGameScreen(navigateBack = navigateBack, gamePagingItems = gamesFavorite)
+    FavoriteGameScreen(navigateBack = navigateBack, gamePagingItems = gamesFavorite, navigateToDetailGame = navigateToDetailGame)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

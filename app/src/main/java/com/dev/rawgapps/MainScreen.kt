@@ -61,7 +61,16 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
             composable(DestinationRoute.FavoriteGameScreen.route) {
-                FavoriteGameRoute()
+                FavoriteGameRoute(navigateBack = {
+                    navController.navigateUp()
+                }, navigateToDetailGame = {
+                    val json = Json.encodeToString(it)
+                    val detailGameRoute = DestinationRoute.DetailGameScreen.route.replace(
+                        oldValue = "{slug}",
+                        newValue = it.slug
+                    ).replace(oldValue = "{game}", newValue = json)
+                    navController.navigate(detailGameRoute)
+                })
             }
         })
 }
