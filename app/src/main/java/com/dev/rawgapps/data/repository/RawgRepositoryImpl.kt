@@ -47,4 +47,7 @@ class RawgRepositoryImpl @Inject constructor(
         gameLocalDataSource.deleteFavoriteGame(slug)
     }
 
+    override suspend fun getFavoriteGames(): Flow<PagingData<Game>> = gameLocalDataSource.getFavoriteGames()
+
+
 }

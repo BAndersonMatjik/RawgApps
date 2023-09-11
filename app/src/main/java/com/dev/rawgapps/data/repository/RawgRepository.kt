@@ -13,4 +13,5 @@ interface RawgRepository {
 
     suspend fun addFavoriteGame(game: Game)
     suspend fun removeFavoriteGame(slug: String)
+    suspend fun getFavoriteGames():Flow<PagingData<Game>>
 }
