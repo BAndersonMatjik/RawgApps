@@ -1,5 +1,6 @@
 package com.dev.rawgapps.data.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,6 +20,9 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM favorite_game WHERE slag = :slag")
     fun findBySlag(slag:String): Flow<FavoriteGameEntity?>
+
+    @Query("SELECT * FROM favorite_game ORDER BY id ASC")
+    fun findAllPaged(): PagingSource<Int,FavoriteGameEntity>
 
     @Query("DELETE FROM favorite_game WHERE slag = :slug")
     fun deleteBySlag(slug: String)
