@@ -28,6 +28,7 @@ roboelectric = "4.10.3"
 turbine = "1.0.0"
 
 [libraries]
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-testing" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android-testing" }
