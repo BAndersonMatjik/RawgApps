@@ -145,7 +145,7 @@ fun ToolbarImageView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteToolbar(title: String, color: Color = CustomColor.NavyBlue, onBackClick: () -> Unit) {
+fun FavoriteToolbar(title: String, color: Color = CustomColor.NavyBlue, onBackClick: () -> Unit={}) {
     TopAppBar(
         title = {
             Text(
