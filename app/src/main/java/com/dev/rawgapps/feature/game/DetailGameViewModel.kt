@@ -9,6 +9,7 @@ import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecase
 import com.dev.rawgapps.domain.usecase.GetDetailGameUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class DetailGameViewModel @Inject constructor(
                 //Handling Ui Event GetDetailGame
                 is DetailGameEvent.GetDetailGame -> {
                     _uiState.value = _uiState.value.copy(isLoading = true)
-                    getDetailGameUseCase(event.slug).collectLatest {
+                    getDetailGameUseCase(event.slug).distinctUntilChanged().collectLatest {
                         it.fold(onSuccess = {
                             _uiState.value = _uiState.value.copy(isLoading = false, game = it, showFavoriteIcon = true)
                         }, onFailure = {
