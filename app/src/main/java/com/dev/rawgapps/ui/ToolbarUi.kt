@@ -71,7 +71,7 @@ fun DetailContentToolbar(
     color: Color = Color.Transparent,
     onBackClick: () -> Unit = {},
     onFavoriteClick: (() -> Unit) = {},
-    showFavoriteIcon:Boolean =false
+    showFavoriteIcon: Boolean = false
 ) {
     TopAppBar(
         title = { },
@@ -85,8 +85,8 @@ fun DetailContentToolbar(
             }
         },
         actions = {
-            IconButton(onClick = onFavoriteClick) {
-                if (showFavoriteIcon){
+            if (showFavoriteIcon) {
+                IconButton(onClick = onFavoriteClick) {
                     if (isFavorite) {
                         Icon(
                             imageVector = Icons.Outlined.Favorite,
@@ -118,7 +118,7 @@ fun ToolbarImageView(
     imageUrl: String = "",
     contentDescription: String = "",
     isFavorite: Boolean = false,
-    showFavoriteIcon:Boolean=false,
+    showFavoriteIcon: Boolean = false,
 ) {
     Box(modifier = modifier) {
         AsyncImage(
@@ -145,7 +145,11 @@ fun ToolbarImageView(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteToolbar(title: String, color: Color = CustomColor.NavyBlue, onBackClick: () -> Unit={}) {
+fun FavoriteToolbar(
+    title: String,
+    color: Color = CustomColor.NavyBlue,
+    onBackClick: () -> Unit = {}
+) {
     TopAppBar(
         title = {
             Text(
