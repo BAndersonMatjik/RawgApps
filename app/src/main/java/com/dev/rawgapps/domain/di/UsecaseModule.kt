@@ -4,6 +4,8 @@ import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecase
 import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecaseImpl
 import com.dev.rawgapps.domain.usecase.GetDetailGameUsecase
 import com.dev.rawgapps.domain.usecase.GetDetailUsecaseImpl
+import com.dev.rawgapps.domain.usecase.GetFavoriteGamesUsecase
+import com.dev.rawgapps.domain.usecase.GetFavoriteGamesUsecaseImpl
 import com.dev.rawgapps.domain.usecase.GetGamesUsecase
 import com.dev.rawgapps.domain.usecase.GetGamesUsecaseImpl
 import dagger.Binds
@@ -21,4 +23,7 @@ abstract class UsecaseModule {
     abstract fun bindGetDetailGameUsecase(getDetailUsecaseImpl: GetDetailUsecaseImpl):GetDetailGameUsecase
     @Binds
     abstract fun bindAddFavoritegameUsecase(addFavoriteGameUsecase: AddFavoriteGameUsecaseImpl):AddFavoriteGameUsecase
+    @Binds
+    abstract fun bindGetFavoriteGamesUsecase(getFavoriteGamesUsecase: GetFavoriteGamesUsecaseImpl):GetFavoriteGamesUsecase
+
 }
