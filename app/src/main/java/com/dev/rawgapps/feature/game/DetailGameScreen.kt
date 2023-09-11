@@ -57,6 +57,11 @@ fun DetailGameScreen(
     if (uiState.errorFetchDetailGame.isNotEmpty()) {
         ShowToastWithComposable(message = uiState.errorFetchDetailGame)
     }
+    if (uiState.showFavoriteIcon){
+        if (uiState.messageToast.isNotEmpty()){
+            ShowToastWithComposable(message = uiState.messageToast)
+        }
+    }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             ToolbarImageView(

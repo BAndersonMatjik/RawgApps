@@ -45,8 +45,20 @@ class DetailGameViewModel @Inject constructor(
                 }
 
                 is DetailGameEvent.SaveIsFavorite->{
-                    Timber.tag(Companion.TAG).d("onEvent: SaveIsFavorite")
-                    addFavoriteGameUsecase(game = _uiState.value.game)
+                    Timber.tag(Companion.TAG).d("onEvent: SaveIsFavorite ${_uiState.value.game.isFavorite}")
+                    kotlin.runCatching {
+                        addFavoriteGameUsecase(game = _uiState.value.game)
+                    }.onFailure {
+                        _uiState.value = _uiState.value.copy(isLoading = false, messageToast = "Error ${it.message}")
+                    }.onSuccess {
+                        val message = if(it){
+                            "Added to Favorite Game"
+                        }else{
+                            "Deleted from Favorite Game"
+                        }
+                        _uiState.value = _uiState.value.copy(isLoading = false, messageToast = message)
+                    }
+
                 }
 
                 else -> {}
@@ -63,6 +75,7 @@ class DetailGameViewModel @Inject constructor(
     data class DetailGameViewState(
         val isLoading: Boolean = false,
         val errorFetchDetailGame: String = "",
+        val messageToast: String="",
         val game: Game = Game(
             slug = "",
             name = "",

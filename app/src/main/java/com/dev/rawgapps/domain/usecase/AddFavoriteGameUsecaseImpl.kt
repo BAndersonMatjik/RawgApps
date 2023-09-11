@@ -10,13 +10,14 @@ import javax.inject.Inject
 @ViewModelScoped
 class AddFavoriteGameUsecaseImpl @Inject constructor(private val rawgRepository: RawgRepository) :
     AddFavoriteGameUsecase {
-    override suspend fun invoke(game: Game) {
-        withContext(Dispatchers.IO){
+    override suspend fun invoke(game: Game):Boolean {
+       return withContext(Dispatchers.IO){
             if (!game.isFavorite){
                 rawgRepository.addFavoriteGame(game)
             }else{
                 rawgRepository.removeFavoriteGame(slug = game.slug)
             }
+            !game.isFavorite
         }
     }
 }
