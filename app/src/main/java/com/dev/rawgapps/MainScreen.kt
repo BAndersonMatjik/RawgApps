@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dev.rawgapps.common.ui.GameParamType
 import com.dev.rawgapps.domain.Game
-import com.dev.rawgapps.feature.favoritegame.FavoriteGameScreen
+import com.dev.rawgapps.feature.favoritegame.FavoriteGameRoute
 import com.dev.rawgapps.feature.game.DetailGameRoute
 import com.dev.rawgapps.feature.game.GameRoute
 import kotlinx.serialization.encodeToString
@@ -61,7 +61,7 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
             composable(DestinationRoute.FavoriteGameScreen.route) {
-                FavoriteGameScreen()
+                FavoriteGameRoute()
             }
         })
 }
