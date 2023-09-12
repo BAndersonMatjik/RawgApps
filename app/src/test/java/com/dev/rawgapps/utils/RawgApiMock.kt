@@ -27,6 +27,9 @@ class RawgApiMock {
             //list
             content = ResourceUtils.getResource2String("games.json")?:""
         }
+        if (request.url.encodedPath.contains("search=zelda")){
+            content = ResourceUtils.getResource2String("games-search-zelda.json")?:""
+        }
         if (request.url.encodedPath.contains("games/forza-motorsport-2020")) {
             //detail
             content = ResourceUtils.getResource2String("forza-game-detail.json")?:""
