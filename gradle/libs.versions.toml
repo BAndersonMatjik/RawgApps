@@ -26,6 +26,7 @@ hilt-navigation="1.0.0"
 kover="0.7.3"
 kotlinx-coroutine-test="1.7.1"
 roboelectric = "4.10.3"
+truth = "1.1.4"
 turbine = "1.0.0"
 
 [libraries]
@@ -42,6 +43,7 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk-agent" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk-android" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
