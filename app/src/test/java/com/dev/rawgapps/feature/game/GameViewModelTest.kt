@@ -1,23 +1,22 @@
 package com.dev.rawgapps.feature.game
 
+import androidx.paging.AsyncPagingDataDiffer
 import androidx.paging.PagingData
-import androidx.paging.map
-import app.cash.turbine.Turbine
-import app.cash.turbine.turbineScope
+import app.cash.turbine.test
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.domain.usecase.GetGamesUsecase
+import com.google.common.truth.Truth
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlin.time.Duration.Companion.milliseconds
 
 
 class GameViewModelTest {
@@ -31,7 +30,11 @@ class GameViewModelTest {
     fun setup() {
         viewModel = spyk(GameViewModel(getGamesUsecase), recordPrivateCalls = true)
     }
-
+    val differ = AsyncPagingDataDiffer(
+        diffCallback = TestDiffCallback<Game>(),
+        updateCallback = TestListCallback(),
+        workerDispatcher = Dispatchers.Unconfined
+    )
     // When_StateUnderTest_Expect_ExpectedBehavior
     @Test
     fun When_StateGetGames_Expect_ShowGames() {
@@ -69,6 +72,14 @@ class GameViewModelTest {
                 viewModel["getGamesAllOrSearch"]("")
             }
             coVerify { getGamesUsecase("") }
+
+            viewModel.gamesState.test {
+                differ.submitData(awaitItem())
+                differ.snapshot().apply {
+                    Truth.assertThat(this.items.size).isEqualTo(1)
+                    Truth.assertThat(this.items[0].name).isEqualTo("Susanna")
+                }
+            }
         }
     }
 
@@ -83,7 +94,7 @@ class GameViewModelTest {
                     PagingData.from(
                         listOf(
                             Game(
-                                slug = "suas",
+                                slug = "sus",
                                 name = "Susanna Farley",
                                 genres = listOf(),
                                 released = "cam",
@@ -100,59 +111,16 @@ class GameViewModelTest {
                 viewModel["getGamesAllOrSearch"]("susas")
             }
             coVerify { getGamesUsecase("susas") }
-        }
-    }
-
-    @Test
-    fun When_StateSearch_Expect_Error() {
-        runTest {
-
-//            emit(PagingData.empty(LoadStates(refresh = LoadState.Error(Exception("")),
-//                prepend =LoadState.NotLoading(false),
-//                append = LoadState.NotLoading(false)
-//            )))
-            coEvery {
-                getGamesUsecase("susas")
-            } returns flow {
-                emit(
-                    PagingData.from(
-                        listOf(
-                            Game(
-                                slug = "suas",
-                                name = "Susanna Farley",
-                                genres = listOf(),
-                                released = "cam",
-                                backgroundImage = "nam",
-                                description = "commune",
-                                developer = ""
-                            )
-                        )
-                    )
-                )
-            }
-            turbineScope {
-                val standalone = Turbine<PagingData<Game>>(timeout = 10.milliseconds)
-                val flow = viewModel.gamesState.asStateFlow().testIn(
-                    scope = backgroundScope,
-                    timeout = 10.milliseconds,
-                )
-
-                flow.awaitItem().map {
-                    println(it)
+            viewModel.gamesState.test {
+                differ.submitData(awaitItem())
+                differ.snapshot().apply {
+                    Truth.assertThat(this.items.size).isEqualTo(1)
+                    Truth.assertThat(this.items[0].name).isEqualTo("Susanna Farley")
                 }
-                flow.awaitComplete()
             }
-
-            viewModel.onEvent(event = GameViewModel.GameEvent.SearchGames("susas"))
-            verify {
-                viewModel["getGamesAllOrSearch"]("susas")
-            }
-            coVerify { getGamesUsecase("susas") }
-
-
         }
+
     }
 
 }
-
 
