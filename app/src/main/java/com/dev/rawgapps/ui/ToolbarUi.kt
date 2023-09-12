@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -86,7 +87,7 @@ fun DetailContentToolbar(
         },
         actions = {
             if (showFavoriteIcon) {
-                IconButton(onClick = onFavoriteClick) {
+                IconButton(onClick = onFavoriteClick, modifier = Modifier.testTag("favoriteIconGroup")) {
                     if (isFavorite) {
                         Icon(
                             imageVector = Icons.Outlined.Favorite,
