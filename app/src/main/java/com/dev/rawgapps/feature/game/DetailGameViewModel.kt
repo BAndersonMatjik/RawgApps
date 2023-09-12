@@ -1,15 +1,17 @@
 package com.dev.rawgapps.feature.game
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.dev.rawgapps.common.BaseViewModel
 import com.dev.rawgapps.domain.Game
 import com.dev.rawgapps.domain.usecase.AddFavoriteGameUsecase
 import com.dev.rawgapps.domain.usecase.GetDetailGameUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -19,46 +21,65 @@ class DetailGameViewModel @Inject constructor(
     private val getDetailGameUseCase: GetDetailGameUsecase,
     private val addFavoriteGameUsecase: AddFavoriteGameUsecase
 ) : BaseViewModel<DetailGameViewModel.DetailGameEvent>() {
-    private val _uiState = mutableStateOf(DetailGameViewState())
-    val uiState: State<DetailGameViewState> get() = _uiState
+    private val _uiState = MutableStateFlow(DetailGameViewState())
+    val uiState: StateFlow<DetailGameViewState> get() = _uiState
     override fun onEvent(event: DetailGameEvent) {
         viewModelScope.launch {
             when (event) {
                 //Handling Ui Event GetDetailGame
                 is DetailGameEvent.GetDetailGame -> {
-                    _uiState.value = _uiState.value.copy(isLoading = true)
+                    _uiState.update {
+                        it.copy(isLoading = true)
+                    }
                     getDetailGameUseCase(event.slug).distinctUntilChanged().collectLatest {
-                        it.fold(onSuccess = {
-                            _uiState.value = _uiState.value.copy(isLoading = false, game = it, showFavoriteIcon = true)
-                        }, onFailure = {
-                            _uiState.value = _uiState.value.copy(
-                                isLoading = false,
-                                errorFetchDetailGame = it.message.toString()
-                            )
+                        it.fold(onSuccess = {response->
+                            _uiState.update {
+                                it.copy(isLoading = false, game = response, showFavoriteIcon = true)
+                            }
+                            Timber.d("uiState "+uiState.value.toString())
+                        }, onFailure = {exception->
+                            _uiState.update {
+                                it.copy(
+                                    isLoading = false,
+                                    errorFetchDetailGame = exception.message.toString()
+                                )
+                            }
+                            Timber.d("uiState "+uiState.value.toString())
                         }
                         )
                     }
                 }
 
                 is DetailGameEvent.Init -> {
-                    _uiState.value = _uiState.value.copy(game = event.game)
+                    _uiState.update {
+                        it.copy(
+                            game = event.game
+                        )
+                    }
                 }
 
-                is DetailGameEvent.SaveIsFavorite->{
-                    Timber.tag(Companion.TAG).d("onEvent: SaveIsFavorite ${_uiState.value.game.isFavorite}")
+                is DetailGameEvent.SaveIsFavorite -> {
+                    Timber.tag(Companion.TAG)
+                        .d("onEvent: SaveIsFavorite ${_uiState.value.game.isFavorite}")
                     kotlin.runCatching {
                         addFavoriteGameUsecase(game = _uiState.value.game)
-                    }.onFailure {
-                        _uiState.value = _uiState.value.copy(isLoading = false, messageToast = "Error ${it.message}")
+                    }.onFailure {exception->
+                       _uiState.update {
+                           _uiState.value.copy(
+                               isLoading = false,
+                               messageToast = "Error ${exception.message}"
+                           )
+                       }
                     }.onSuccess {
-                        val message = if(it){
+                        val message = if (it) {
                             "Added to Favorite Game"
-                        }else{
+                        } else {
                             "Deleted from Favorite Game"
                         }
-                        _uiState.value = _uiState.value.copy(isLoading = false, messageToast = message)
+                        _uiState.updateAndGet {
+                            it.copy(isLoading = false, messageToast = message)
+                        }
                     }
-
                 }
 
                 else -> {}
@@ -75,7 +96,7 @@ class DetailGameViewModel @Inject constructor(
     data class DetailGameViewState(
         val isLoading: Boolean = false,
         val errorFetchDetailGame: String = "",
-        val messageToast: String="",
+        val messageToast: String = "",
         val game: Game = Game(
             slug = "",
             name = "",
@@ -85,7 +106,7 @@ class DetailGameViewModel @Inject constructor(
             description = "",
             developer = ""
         ),
-        val showFavoriteIcon:Boolean = false
+        val showFavoriteIcon: Boolean = false
     )
 
     companion object {
