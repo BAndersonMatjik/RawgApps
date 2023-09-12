@@ -48,6 +48,7 @@ class RawgRemoteDataSourceImplTest {
             })
         }
     }
+
     @Test
     fun given_params_then_failed() {
         apiMock.isFailed = true
@@ -81,9 +82,23 @@ class RawgRemoteDataSourceImplTest {
         } returns "Testable"
         apiMock.isFailed = true
         runTest {
-            rawgRemoteDataSourceImpl.getGameDetail("forza-motorsport-2020").exceptionOrNull().apply {
-                Truth.assertThat(this).isNotNull()
-                Truth.assertThat(this).isInstanceOf(ClientRequestException::class.java)
+            rawgRemoteDataSourceImpl.getGameDetail("forza-motorsport-2020").exceptionOrNull()
+                .apply {
+                    Truth.assertThat(this).isNotNull()
+                    Truth.assertThat(this).isInstanceOf(ClientRequestException::class.java)
+                }
+        }
+    }
+
+    @Test
+    fun when_get_search_games_then_return_all() {
+        mockkStatic(HtmlCompat::class)
+        coEvery {
+            HtmlCompat.fromHtml(any(), any()).toString()
+        } returns "Testable"
+        runTest {
+            rawgRemoteDataSourceImpl.getGames(1, 20, "zelda").getOrThrow().apply {
+                Truth.assertThat(this.size).isEqualTo(20)
             }
         }
     }
