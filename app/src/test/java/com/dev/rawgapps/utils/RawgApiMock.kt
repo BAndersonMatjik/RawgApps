@@ -20,17 +20,15 @@ class RawgApiMock {
         request: HttpRequestData
     ): HttpResponseData? {
         var content = ""
-        if (request.url.encodedPath.contains("games").not()) {
-            return null
-        }
-
-        if (request.url.encodedPath.contains("games/")) {
-            //detail
-        }
         if (request.url.encodedPath.contains("games")) {
             //list
             content = ResourceUtils.getResource2String("games.json")?:""
         }
+        if (request.url.encodedPath.contains("games/forza-motorsport-2020")) {
+            //detail
+            content = ResourceUtils.getResource2String("forza-game-detail.json")?:""
+        }
+
         return respond(
             content = content,
             status = HttpStatusCode.OK,
