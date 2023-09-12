@@ -76,8 +76,9 @@ class GameViewModelTest {
             viewModel.gamesState.test {
                 differ.submitData(awaitItem())
                 differ.snapshot().apply {
-                    Truth.assertThat(this.items.size).isEqualTo(1)
-                    Truth.assertThat(this.items[0].name).isEqualTo("Susanna")
+                    Truth.assertThat(this.items.size).isEqualTo(2)
+                    Truth.assertThat(this.items[0].name).isEqualTo("Susanna Farley")
+                    Truth.assertThat(this.items[1].name).isEqualTo("Darren Donaldson")
                 }
             }
         }
