@@ -21,7 +21,7 @@ class FavoriteGameViewModel @Inject constructor(
         MutableStateFlow(value = PagingData.empty())
     val gamesState: MutableStateFlow<PagingData<Game>> get() = _gameState
     init {
-        onEvent(FavoriteGameViewModel.FavoriteGameEvent.GetFavoriteGames)
+        onEvent(FavoriteGameEvent.GetFavoriteGames)
     }
     sealed class FavoriteGameEvent {
         object GetFavoriteGames : FavoriteGameEvent()
@@ -31,15 +31,18 @@ class FavoriteGameViewModel @Inject constructor(
         viewModelScope.launch {
             when (event) {
                 is FavoriteGameEvent.GetFavoriteGames -> {
-                    getFavoriteGamesUsecase().distinctUntilChanged().cachedIn(viewModelScope)
-                        .collectLatest {
-                            _gameState.value = it
-                        }
+                    getFavoriteGames()
                 }
                 else -> {
 
                 }
             }
         }
+    }
+    private suspend fun getFavoriteGames(){
+        getFavoriteGamesUsecase().distinctUntilChanged().cachedIn(viewModelScope)
+            .collectLatest {
+                _gameState.value = it
+            }
     }
 }
