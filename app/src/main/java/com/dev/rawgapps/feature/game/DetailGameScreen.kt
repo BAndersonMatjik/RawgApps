@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dev.rawgapps.ShowToastWithComposable
 import com.dev.rawgapps.common.CustomFontFamily
 import com.dev.rawgapps.domain.Game
@@ -39,11 +40,12 @@ internal fun DetailGameRoute(
             onEvent(DetailGameViewModel.DetailGameEvent.GetDetailGame(slug))
         }
     }
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     DetailGameScreen(onBackClick = navigateBack, onFavoriteClick = {
         //event send flag is my favorite
         viewModel.onEvent(DetailGameViewModel.DetailGameEvent.SaveIsFavorite)
         Timber.d("Click Favorite")
-    }, uiState = viewModel.uiState.value)
+    }, uiState = uiState.value)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
