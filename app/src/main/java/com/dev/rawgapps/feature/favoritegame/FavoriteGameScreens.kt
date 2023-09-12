@@ -1,16 +1,21 @@
 package com.dev.rawgapps.feature.favoritegame
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,6 +23,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.dev.rawgapps.common.CustomColor
 import com.dev.rawgapps.common.PhonePreviews
 import com.dev.rawgapps.common.ui.GameScreenPreviewParameterProvider
 import com.dev.rawgapps.domain.Game
@@ -64,20 +70,62 @@ fun FavoriteGameScreen(
             gamePagingItems.apply {
                 when {
                     loadState.refresh is LoadState.Loading -> {
-                        item { Text(text = "Loading - LOADING") }
+                        item { Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            LinearProgressIndicator(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                color = CustomColor.NavyBlue
+                            )
+                        } }
                     }
 
                     loadState.refresh is LoadState.Error -> {
                         val error = gamePagingItems.loadState.refresh as LoadState.Error
-                        item { Text(text = "error ${error.error.message.toString()}") }
+                        item {
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(text = "Error :: ${error.error.message.toString()}", modifier = Modifier.fillMaxWidth(),
+                                    textAlign = TextAlign.Center)
+                                Button(onClick = {
+                                    gamePagingItems.retry()
+                                }, content = {
+                                    Text(text = "Retry")
+                                })
+
+                            }
+                        }
                     }
 
                     loadState.append is LoadState.Loading -> {
-                        item { Text(text = "Loading - APPEND") }
+                        item {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                LinearProgressIndicator(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    color = CustomColor.NavyBlue
+                                )
+                            }
+                        }
                     }
 
                     loadState.append is LoadState.Error -> {
-                        item { Text(text = "error") }
+                        item { Column {
+                            Text(
+                                text = "Not Found More Data",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
+                            Button(onClick = {
+                                gamePagingItems.retry()
+                            }, content = {
+                                Text(text = "Retry")
+                            })
+                        } }
                     }
                 }
             }
