@@ -30,7 +30,7 @@ class GameViewModelTest {
     fun setup() {
         viewModel = spyk(GameViewModel(getGamesUsecase), recordPrivateCalls = true)
     }
-    val differ = AsyncPagingDataDiffer(
+    private val differ = AsyncPagingDataDiffer(
         diffCallback = TestDiffCallback<Game>(),
         updateCallback = TestListCallback(),
         workerDispatcher = Dispatchers.Unconfined
@@ -76,6 +76,7 @@ class GameViewModelTest {
             viewModel.gamesState.test {
                 differ.submitData(awaitItem())
                 differ.snapshot().apply {
+                    println(this.items)
                     Truth.assertThat(this.items.size).isEqualTo(2)
                     Truth.assertThat(this.items[0].name).isEqualTo("Susanna Farley")
                     Truth.assertThat(this.items[1].name).isEqualTo("Darren Donaldson")
@@ -115,6 +116,7 @@ class GameViewModelTest {
             viewModel.gamesState.test {
                 differ.submitData(awaitItem())
                 differ.snapshot().apply {
+                    println(this.items)
                     Truth.assertThat(this.items.size).isEqualTo(1)
                     Truth.assertThat(this.items[0].name).isEqualTo("Susanna Farley")
                 }
