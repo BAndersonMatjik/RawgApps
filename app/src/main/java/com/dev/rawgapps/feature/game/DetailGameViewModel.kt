@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -76,7 +75,7 @@ class DetailGameViewModel @Inject constructor(
                         } else {
                             "Deleted from Favorite Game"
                         }
-                        _uiState.updateAndGet {
+                        _uiState.update {
                             it.copy(isLoading = false, messageToast = message)
                         }
                     }
