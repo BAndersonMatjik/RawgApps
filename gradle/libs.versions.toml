@@ -2,6 +2,7 @@
 agp = "8.1.0"
 hilt-android-testing = "2.47"
 kotlinx-coroutines-test = "org-jetbrains-kotlin-android"
+lifecycle-runtime-compose = "2.6.0"
 mockk = "1.37.1"
 mockk-agent = "1.13.7"
 mockk-android = "1.13.7"
@@ -28,6 +29,7 @@ roboelectric = "4.10.3"
 turbine = "1.0.0"
 
 [libraries]
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt-android-testing" }

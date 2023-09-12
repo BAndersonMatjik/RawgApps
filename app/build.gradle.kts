@@ -86,7 +86,7 @@ dependencies {
     implementation(libs.ktor.client.serialization)
     implementation(libs.ktor.client.logging)
     implementation(libs.serialization.json)
-
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.coil)
 
     implementation(libs.navigation.compose)
