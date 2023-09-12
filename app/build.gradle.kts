@@ -129,11 +129,20 @@ koverReport {
                 "com.dev.rawgapps.*.*_HiltModules*",
                 "com.dev.rawgapps.*.*Module_*",
                 "com.dev.rawgapps.*.*MembersInjector*",
-                "com.dev.rawgapps.*.*_Impl*",
+
                 "com.dev.rawgapps.ComposableSingletons*",
                 "com.dev.rawgapps.BuildConfig*",
                 "com.dev.rawgapps.*.Fake*",
-                "com.dev.rawgapps.app.ComposableSingletons*"
+            )
+            classes(
+                "com.dev.rawgapps.*.di.*",
+                "com.dev.rawgapps.*.*_Factory*",
+                "com.dev.rawgapps.*.*_HiltModules*",
+                "com.dev.rawgapps.*.*.ComposableSingletons*",
+                "com.dev.rawgapps.*.*_Impl*",
+                "com.dev.rawgapps.ComposableSingletons*",
+                "com.dev.rawgapps.Hilt_*",
+                "com.dev.rawgapp.common.ui.*PreviewParameterProvider"
             )
 
         }
