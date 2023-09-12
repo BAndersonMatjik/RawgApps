@@ -95,6 +95,8 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
 
+
+    testImplementation(libs.androidx.core.ktx)
     testImplementation(libs.paging.testing)
     testImplementation(libs.roboelectric)
     testImplementation(libs.junit)
