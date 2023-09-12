@@ -73,6 +73,7 @@ navigation-hilt={group = 'androidx.hilt' ,name="hilt-navigation-compose", versio
 ktor-client-mock={group = 'io.ktor' ,name="ktor-client-mock", version.ref= "ktor"}
 kotlinx-coroutines-test={group = 'org.jetbrains.kotlinx' ,name="kotlinx-coroutines-test", version.ref= "kotlinx-coroutine-test"}
 roboelectric={group='org.robolectric',name="robolectric",version.ref = "roboelectric"}
+androidx-core-ktx = { group = "androidx.test", name = "core-ktx", version = "1.5.0" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

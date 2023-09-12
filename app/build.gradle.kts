@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.timber)
 
     implementation(libs.dagger.hilt)
+    implementation(libs.androidx.core.ktx)
     kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.room.ktx)
@@ -131,7 +132,7 @@ koverReport {
                 "com.dev.rawgapps.*.*_HiltModules*",
                 "com.dev.rawgapps.*.*Module_*",
                 "com.dev.rawgapps.*.*MembersInjector*",
-
+                "com.dev.rawgapps.common.ui",
                 "com.dev.rawgapps.ComposableSingletons*",
                 "com.dev.rawgapps.BuildConfig*",
                 "com.dev.rawgapps.*.Fake*",
