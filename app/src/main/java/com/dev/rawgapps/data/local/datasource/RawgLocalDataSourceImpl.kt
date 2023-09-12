@@ -26,7 +26,7 @@ class RawgLocalDataSourceImpl @Inject constructor(
 ) : RawgLocalDataSource {
     @OptIn(ExperimentalSerializationApi::class)
     override fun getGameBySlag(slag: String): Flow<Result<Game>> = dao.findBySlag(slag).mapNotNull {
-        Timber.tag(TAG).i("getGameBySlag: Fetch Local Data slag: " + slag)
+        Timber.tag(TAG).i("getGameBySlag: Fetch Local Data slag: %s", slag)
         val jsonContent = it?.jsonContent ?: ""
         if (jsonContent.isBlank()) {
             return@mapNotNull Result.failure<Game>(Exception("Data Not Found"))
