@@ -13,9 +13,12 @@ import io.ktor.http.headersOf
 
 class RawgApiMock {
     val engine = MockEngine {
+        if (isFailed){
+           return@MockEngine handleBadRequest()
+        }
         handleRequest(it) ?:handleBadRequest()
     }
-
+    var isFailed = false
     private fun MockRequestHandleScope.handleRequest(
         request: HttpRequestData
     ): HttpResponseData? {
